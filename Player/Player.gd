@@ -1,6 +1,12 @@
 #Player
 extends RigidBody2D
 
+signal shoot
+export (PackedScene) var Bullet
+export (float) var fire_rate
+var can_shoot = true
+
+
 # to create a finite state machine
 enum {INIT, ALIVE, INVULNERABLE, DEAD}
 var state = null
@@ -22,6 +28,7 @@ func _ready():
 	change_state(ALIVE)
 #	получаем размер видимого экрана
 	screensize = get_viewport().get_visible_rect().size
+	$GunTimer.wait_time = fire_rate	
 
 func _process(delta):
 	get_input()
@@ -38,6 +45,15 @@ func get_input():
 		rotation_dir += 1
 	if Input.is_action_pressed('rotate_left'):
 		rotation_dir -= 1
+	if Input.is_action_pressed("shoot") and can_shoot:
+		shoot()
+		
+func shoot():
+	if state == INVULNERABLE:
+		return
+	emit_signal('shoot', Bullet, $Muzzle.global_position, rotation)
+	can_shoot = false
+	$GunTimer.start()
 		
 # автомат конечных состояний
 func change_state(new_state):
@@ -71,65 +87,6 @@ func _integrate_forces(physics_state):
 		xform.origin.y = screensize.y
 #	задаем новое положение
 	physics_state.set_transform(xform)
-		
 
-
-
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+func _on_GunTimer_timeout():
+	can_shoot = true
