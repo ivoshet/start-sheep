@@ -1,7 +1,18 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Rock/Rock.gd" type="Script" id=1]
+[ext_resource path="res://assets/rock.png" type="Texture" id=2]
 
 [node name="Rock" type="RigidBody2D"]
 linear_damp = 0.0
 angular_damp = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 298, 175 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
