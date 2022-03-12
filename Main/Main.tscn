@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 1024, 8, 0, 0, 0, 0, 1024, 592, 0, 0, 0, 0, 0, 592 )
+"points": PoolVector2Array( 0, 0, 0, 0, 935.704, 33.9556, 0, 0, 0, 0, 920.988, 599.644, 0, 0, 0, 0, -6.12345, 599.644, 0, 0, 0, 0, -6.12345, 33.9556, 0, 0, 0, 0, 935.704, 33.9556 )
 }
 
 [node name="Main" type="Node"]
@@ -23,11 +23,13 @@ centered = false
 position = Vector2( 98, 324 )
 
 [node name="RockPath" type="Path2D" parent="."]
+position = Vector2( 14.6577, -27.5349 )
+scale = Vector2( 1.08725, 1.04651 )
 curve = SubResource( 1 )
 
 [node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
-position = Vector2( 0, 8 )
-rotation = -2.43056e-07
+position = Vector2( 935.704, 33.9556 )
+rotation = 1.5968
 
 [node name="Rocks" type="Node" parent="."]
 

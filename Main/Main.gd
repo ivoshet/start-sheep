@@ -8,9 +8,11 @@ func _ready():
 	randomize()
 	screensize = get_viewport().get_visible_rect().size
 	$Player.screensize = screensize
+#	появляются 3 метеорита
 	for i in range(3):
 		spawn_rock(3)
-		
+
+#	появляются метеориты	
 func spawn_rock(size, pos=null, vel=null):
 	if !pos:
 		$RockPath/RockSpawn.set_offset(randi())
@@ -22,7 +24,7 @@ func spawn_rock(size, pos=null, vel=null):
 	r.start(pos, vel, size)
 	$Rocks.add_child(r)
 		
-
+#	появляются выстрелы
 func _on_Player_shoot(bullet, pos, dir):
 	var b = bullet.instance()
 	b.start(pos, dir)
