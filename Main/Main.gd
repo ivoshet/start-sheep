@@ -23,9 +23,22 @@ func spawn_rock(size, pos=null, vel=null):
 	r.screensize = screensize
 	r.start(pos, vel, size)
 	$Rocks.add_child(r)
+#	подключаем сигнал от метеорита через код
+	r.connect('exploded', self, '_on_Rock_exploded')
 		
 #	появляются выстрелы
 func _on_Player_shoot(bullet, pos, dir):
 	var b = bullet.instance()
 	b.start(pos, dir)
 	add_child(b)
+
+#	разбиваем метеорит на 2
+func _on_Rock_exploded(size, radius, pos, vel):
+	if size <= 1:
+		return
+	for offset in [-1, 1]:
+		var dir = (pos - $Player.position).normalized().tangent() * offset
+		var newpos = pos + dir * radius
+		var newvel = dir * vel.length() * 1.1
+		spawn_rock(size - 1, newpos, newvel)
+	
