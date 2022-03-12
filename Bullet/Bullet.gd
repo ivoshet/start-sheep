@@ -21,7 +21,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 #	уведомление о попадании
 func _on_Bullet_body_entered(body):
 	if body.is_in_group('rocks'):
-		print('Bullet._on_Bullet_body_entered')
+#		print('Bullet._on_Bullet_body_entered')
 		body.explode()
 		queue_free()
 		

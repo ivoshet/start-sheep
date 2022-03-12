@@ -4,6 +4,11 @@ extends Node
 export (PackedScene) var Rock
 var screensize
 
+# для счета
+var level : int = 0
+var score : int = 0
+var playing : bool = false
+
 func _ready():
 	randomize()
 	screensize = get_viewport().get_visible_rect().size
