@@ -2,10 +2,14 @@
 extends RigidBody2D
 
 signal shoot
+# для подсчета результатов
+signal lives_changed
+#	вызов сеттера каждый раз при изменении значения переменной
+var lives = 0 setget set_lives
+
 export (PackedScene) var Bullet
 export (float) var fire_rate
 var can_shoot = true
-
 
 # to create a finite state machine
 enum {INIT, ALIVE, INVULNERABLE, DEAD}
@@ -90,3 +94,13 @@ func _integrate_forces(physics_state):
 
 func _on_GunTimer_timeout():
 	can_shoot = true
+
+#	вызов функции при каждом изменении значения переменной
+func set_lives(value):
+	lives = value
+	emit_signal("lives_changed", lives)
+
+func start():
+	$Sprite.show()
+	self.lives = 3
+	change_state(ALIVE)
