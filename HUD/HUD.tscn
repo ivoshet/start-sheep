@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/kenvector_future_thin.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://assets/play_button_h.png" type="Texture" id=3]
 [ext_resource path="res://assets/play_button.png" type="Texture" id=4]
+[ext_resource path="res://assets/player_ship.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -18,16 +19,13 @@ script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = 20.0
+margin_left = 37.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 984.0
+margin_right = 987.0
 margin_bottom = 147.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,26 +38,37 @@ custom_fonts/font = SubResource( 1 )
 text = "0
 "
 
-[node name="LiveCounter" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 49.0
-margin_right = 57.0
-margin_bottom = 147.0
+[node name="LiveCounter" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -212.0
+margin_bottom = 149.0
+rect_scale = Vector2( 0.5, 0.5 )
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="L1" type="TextureRect" parent="MarginContainer/HBoxContainer/LiveCounter"]
-margin_bottom = 147.0
+[node name="L1" type="TextureRect" parent="LiveCounter"]
+margin_right = 128.0
+margin_bottom = 149.0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource( 5 )
+stretch_mode = 6
 
-[node name="L2" type="TextureRect" parent="MarginContainer/HBoxContainer/LiveCounter"]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 147.0
+[node name="L2" type="TextureRect" parent="LiveCounter"]
+margin_left = 132.0
+margin_right = 260.0
+margin_bottom = 149.0
+texture = ExtResource( 5 )
+stretch_mode = 6
 
-[node name="L3" type="TextureRect" parent="MarginContainer/HBoxContainer/LiveCounter"]
-margin_left = 8.0
-margin_right = 8.0
-margin_bottom = 147.0
+[node name="L3" type="TextureRect" parent="LiveCounter"]
+margin_left = 264.0
+margin_right = 392.0
+margin_bottom = 149.0
+texture = ExtResource( 5 )
+stretch_mode = 6
 
 [node name="StartButton" type="TextureButton" parent="."]
 anchor_left = 0.5
@@ -78,8 +87,8 @@ __meta__ = {
 
 [node name="MessageLabel" type="Label" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 25.0
+margin_top = 494.0
+margin_bottom = 566.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {

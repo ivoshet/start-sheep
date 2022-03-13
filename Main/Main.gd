@@ -39,6 +39,8 @@ func _on_Player_shoot(bullet, pos, dir):
 
 #	разбиваем метеорит на 2
 func _on_Rock_exploded(size, radius, pos, vel):
+	score += 1
+	$HUD.update_score(score)
 	if size <= 1:
 		return
 	for offset in [-1, 1]:

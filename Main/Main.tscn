@@ -32,7 +32,7 @@ curve = SubResource( 1 )
 
 [node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
 position = Vector2( 906.271, 64.5333 )
-rotation = 1.58536
+rotation = 1.58537
 
 [node name="Rocks" type="Node" parent="."]
 pause_mode = 1
