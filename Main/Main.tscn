@@ -8,10 +8,11 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 935.704, 33.9556, 0, 0, 0, 0, 920.988, 599.644, 0, 0, 0, 0, -6.12345, 599.644, 0, 0, 0, 0, -6.12345, 33.9556, 0, 0, 0, 0, 935.704, 33.9556 )
+"points": PoolVector2Array( 0, 0, 0, 0, 906.271, 64.5333, 0, 0, 0, 0, 898.914, 569.067, 0, 0, 0, 0, 8.59259, 584.355, 0, 0, 0, 0, 8.59259, 56.8889, 0, 0, 0, 0, 906.271, 64.5333 )
 }
 
 [node name="Main" type="Node"]
+pause_mode = 2
 script = ExtResource( 3 )
 Rock = ExtResource( 4 )
 
@@ -21,6 +22,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+pause_mode = 1
 position = Vector2( 98, 324 )
 
 [node name="RockPath" type="Path2D" parent="."]
@@ -29,12 +31,14 @@ scale = Vector2( 1.08725, 1.04651 )
 curve = SubResource( 1 )
 
 [node name="RockSpawn" type="PathFollow2D" parent="RockPath"]
-position = Vector2( 935.704, 33.9556 )
-rotation = 1.5968
+position = Vector2( 906.271, 64.5333 )
+rotation = 1.58536
 
 [node name="Rocks" type="Node" parent="."]
+pause_mode = 1
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+pause_mode = 1
 
 [connection signal="dead" from="Player" to="." method="game_over"]
 [connection signal="lives_changed" from="Player" to="HUD" method="update_lives"]

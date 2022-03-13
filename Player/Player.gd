@@ -65,7 +65,7 @@ func change_state(new_state):
 	match new_state:
 		INIT:
 			$CollisionShape2D.disabled = true
-			$Sprite.modulate.a = 0.5
+			$Sprite.modulate.a = 0.1
 		ALIVE:
 			$CollisionShape2D.disabled = false
 			$Sprite.modulate.a = 1
@@ -124,7 +124,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 #	задать значение 1 в Contact Report
 func _on_Player_body_entered(body):
 #	pass # Replace with function body.
-	print("Player._on_Player_body_entered")
+#	print("Player._on_Player_body_entered")
 	if body.is_in_group('rocks'):
 		body.explode()
 		$Explosion.show()

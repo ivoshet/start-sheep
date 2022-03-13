@@ -72,4 +72,19 @@ func _process(delta):
 func game_over():
 	playing = false
 	$HUD.game_over()
+	
+#	постановка игры на паузу
+func _input(event):
+	if event.is_action_pressed('pause'):
+		if get_tree().paused:
+			get_tree().paused = false
+			$HUD/MessageLabel.text = ""
+			$HUD/MessageLabel.hide()			
+		else:
+			get_tree().paused = true
+			$HUD/MessageLabel.text = "Paused"
+			$HUD/MessageLabel.show()
+#
+	
+	
 
