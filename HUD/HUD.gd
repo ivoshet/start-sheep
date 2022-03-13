@@ -4,11 +4,6 @@ extends CanvasLayer
 signal start_game
 var lives_number:int = 3
 
-#onready var lives_counter = [
-#	$MarginContainer/HBoxContainer/LiveCounter/L1,
-#	$MarginContainer/HBoxContainer/LiveCounter/L2,
-#	$MarginContainer/HBoxContainer/LiveCounter/L3
-#]
 onready var lives_counter = [
 	$LiveCounter/L1,
 	$LiveCounter/L2,

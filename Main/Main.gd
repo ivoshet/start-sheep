@@ -2,6 +2,8 @@
 extends Node
 
 export (PackedScene) var Rock
+export (PackedScene) var Enemy
+
 var screensize
 
 # для счета
@@ -13,6 +15,7 @@ func _ready():
 	randomize()
 	screensize = get_viewport().get_visible_rect().size
 	$Player.screensize = screensize
+#	get_tree().paused = true
 #	появляются 3 метеорита
 	for i in range(3):
 		spawn_rock(3)
@@ -50,6 +53,7 @@ func _on_Rock_exploded(size, radius, pos, vel):
 		spawn_rock(size - 1, newpos, newvel)
 		
 func new_game():
+#	get_tree().paused = false
 	for rock in $Rocks.get_children():
 		rock.queue_free()
 	level = 0
@@ -66,6 +70,8 @@ func new_level():
 	$HUD.show_message("Wave %s" % level)
 	for i in range(level):
 		spawn_rock(3)
+	$EnemyTimer.wait_time = rand_range(5, 10)
+	$EnemyTimer.start()
 
 func _process(delta):
 	if playing and $Rocks.get_child_count() == 0:
@@ -86,7 +92,34 @@ func _input(event):
 			get_tree().paused = true
 			$HUD/MessageLabel.text = "Paused"
 			$HUD/MessageLabel.show()
-#
-	
-	
+
+func _on_EnemyTimer_timeout():
+	print('Main 97')
+	var e = Enemy.instance()
+	add_child(e)
+	e.target = $Player
+	e.connect('shoot', self, '_on_Player_shoot')
+	$EnemyTimer.wait_time = rand_range(20, 40)
+	$EnemyTimer.start()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
