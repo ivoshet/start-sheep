@@ -68,4 +68,8 @@ func new_level():
 func _process(delta):
 	if playing and $Rocks.get_child_count() == 0:
 		new_level()
+#	доступ к концу игры
+func game_over():
+	playing = false
+	$HUD.game_over()
 

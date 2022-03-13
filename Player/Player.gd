@@ -2,6 +2,7 @@
 extends RigidBody2D
 
 signal shoot
+signal dead
 # для подсчета результатов
 signal lives_changed
 #	вызов сеттера каждый раз при изменении значения переменной
@@ -64,12 +65,19 @@ func change_state(new_state):
 	match new_state:
 		INIT:
 			$CollisionShape2D.disabled = true
+			$Sprite.modulate.a = 0.5
 		ALIVE:
 			$CollisionShape2D.disabled = false
+			$Sprite.modulate.a = 1
 		INVULNERABLE:
 			$CollisionShape2D.disabled = true
+			$Sprite.modulate.a = 0.5
+			$InvulnerabilityTimer.start()
 		DEAD:
 			$CollisionShape2D.disabled = true
+			$Sprite.hide()
+			linear_velocity = Vector2()
+			emit_signal("dead")
 	state = new_state
 
 #	метод прямого доступа к свойствам RigidBody
@@ -104,3 +112,38 @@ func start():
 	$Sprite.show()
 	self.lives = 3
 	change_state(ALIVE)
+
+func _on_InvulnerabilityTimer_timeout():
+	change_state(ALIVE)
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+#	pass # Replace with function body.
+	$Explosion.hide()
+
+#	контакт с другим RigidBody2D - предварительно включить Contact Monitor и
+#	задать значение 1 в Contact Report
+func _on_Player_body_entered(body):
+#	pass # Replace with function body.
+	print("Player._on_Player_body_entered")
+	if body.is_in_group('rocks'):
+		body.explode()
+		$Explosion.show()
+		$Explosion/AnimationPlayer.play("explosion")
+		self.lives -= 1
+		if lives <= 0:
+			change_state(DEAD)
+		else:
+			change_state(INVULNERABLE) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
