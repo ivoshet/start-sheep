@@ -125,15 +125,25 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_Player_body_entered(body):
 #	pass # Replace with function body.
 #	print("Player._on_Player_body_entered")
-	if body.is_in_group('rocks'):
-		body.explode()
-		$Explosion.show()
-		$Explosion/AnimationPlayer.play("explosion")
-		self.lives -= 1
-		if lives <= 0:
-			change_state(DEAD)
-		else:
-			change_state(INVULNERABLE) 
+	print("Player 128")
+	$Explosion.show()
+	$Explosion/AnimationPlayer.play("explosion")
+	self.lives -= 1
+	if lives <= 0:
+		change_state(DEAD)
+	else:
+		change_state(INVULNERABLE) 
+	
+	
+#	if body.is_in_group('rocks'):
+#		body.explode()
+#		$Explosion.show()
+#		$Explosion/AnimationPlayer.play("explosion")
+#		self.lives -= 1
+#		if lives <= 0:
+#			change_state(DEAD)
+#		else:
+#			change_state(INVULNERABLE) 
 	
 	
 	

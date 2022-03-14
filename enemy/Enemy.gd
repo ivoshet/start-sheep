@@ -28,7 +28,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()
 
 func _on_GunTimer_timeout():
-	shoot_pulse(3, 0.15)
+	shoot_pulse(3, 0.5)
 	
 func shoot():
 	var dir = target.global_position - global_position
@@ -40,12 +40,25 @@ func shoot_pulse(n, delay):
 		shoot()
 		yield(get_tree().create_timer(delay), 'timeout')
 
+#	поражение врага
 func take_damage(amount):
-	pass
+	health -= amount
+	$AnimationPlayer.play("flash")
+	if health <= 0:
+		explode()
+	yield($AnimationPlayer, "animation_finished")
+	$AnimationPlayer.play("rotate")	
+
+func explode():
+	speed = 0
+	$GunTimer.stop()
+	$CollisionShape2D.disabled = true
+	$Sprite.hide()
+	$Explosion.show()
+	$Explosion/AnimationPlayer.play("explosion")
+#	$ExplodeSound.play()
 	
-
-
-
-
-	
-	
+func _on_Enemy_body_entered(body):
+	if body.name =='Player':
+		pass
+	explode()

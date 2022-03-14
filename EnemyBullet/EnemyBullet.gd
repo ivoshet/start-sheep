@@ -1,6 +1,7 @@
 # EnemyBullet
 extends Area2D
 
+
 export (int) var speed
 var velocity = Vector2()
 
@@ -17,7 +18,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	
 func _on_EnemyBullet_body_entered(body):
 	queue_free()
-	
+
 	
 	
 	

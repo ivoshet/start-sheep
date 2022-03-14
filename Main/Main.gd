@@ -70,12 +70,14 @@ func new_level():
 	$HUD.show_message("Wave %s" % level)
 	for i in range(level):
 		spawn_rock(3)
+#	появление врагов вначале уровня
 	$EnemyTimer.wait_time = rand_range(5, 10)
 	$EnemyTimer.start()
 
 func _process(delta):
 	if playing and $Rocks.get_child_count() == 0:
 		new_level()
+		
 #	доступ к концу игры
 func game_over():
 	playing = false
@@ -93,13 +95,15 @@ func _input(event):
 			$HUD/MessageLabel.text = "Paused"
 			$HUD/MessageLabel.show()
 
+#	инициализация врагов
+#	5, 10 - интервал появления врагов
 func _on_EnemyTimer_timeout():
-	print('Main 97')
+#	print('Main 97')
 	var e = Enemy.instance()
 	add_child(e)
 	e.target = $Player
 	e.connect('shoot', self, '_on_Player_shoot')
-	$EnemyTimer.wait_time = rand_range(20, 40)
+	$EnemyTimer.wait_time = rand_range(5, 10)
 	$EnemyTimer.start()
 
 
